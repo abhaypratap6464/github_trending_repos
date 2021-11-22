@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.android.example.demomvvm.data.remote.model.Repo" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_small"
+        app:cardCornerRadius="@dimen/margin_extra_small"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:padding="@dimen/padding_small">
+
+            <ImageView
+                android:id="@+id/avatar"
+                avatarImage="@{item.owner.avatar_url}"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_margin="@dimen/margin_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@android:drawable/picture_frame" />
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/TextViewHeaderStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:text='@{String.format("%s / %s", item.owner.login , item.name)}'
+                android:maxLines="1"
+                app:layout_constraintBottom_toTopOf="@+id/description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/avatar"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="abhay / kotlin-trending-repos-and-a-much" />
+
+            <TextView
+                android:id="@+id/description"
+                style="@style/TextViewDescriptionStyle"
+                android:layout_width="@dimen/zero_dimen"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{item.description}"
+                app:layout_constraintBottom_toBottomOf="@id/avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/avatar"
+                app:layout_constraintTop_toTopOf="@+id/avatar"
+                tools:text="Android App that lists trending Kotlin Github repositories" />
+
+            <TextView
+                android:id="@+id/language"
+                style="@style/TextViewDescriptionStyle"
+                android:layout_width="@dimen/zero_dimen"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:drawablePadding="@dimen/padding_small"
+                android:gravity="center_vertical"
+                android:text="@{item.language}"
+                app:drawableStartCompat="@drawable/ic_circle"
+                app:drawableTint="@color/colorPrimary"
+                app:layout_constraintStart_toEndOf="@+id/avatar"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                tools:text="Kotlin" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
